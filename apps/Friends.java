@@ -138,5 +138,33 @@ public class Friends{
 		fReader.close();
 		return;
 	}
+	
+	public void connectors(){
+		/*
+		 * Complete this method
+		 */
+		return;
+	}
+	
+	public void school(){
+		/*
+		 * Complete this method
+		 */
+		return;
+	}
 
+	public void shortestChain(){
+		/*
+		 * Complete this method
+		 */
+		return;
+	}
+	
+	public void cliques(){
+		/*
+		 * Complete this method
+		 */
+		return;
+	}
+	
 }
