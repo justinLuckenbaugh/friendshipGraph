@@ -17,7 +17,7 @@ public class Friends{
 	 */
 	ArrayList<String> map = new ArrayList<String>();
 	ArrayList<Person> people = new ArrayList<Person>();
-	ArrayList<Node<Integer>> vertexes = new ArrayList<Node<Integer>>();
+	ArrayList<Node<Integer>> vertices = new ArrayList<Node<Integer>>();
 	
 	static Scanner stdin = new Scanner(System.in);
 	static char getOption(){
@@ -47,6 +47,7 @@ public class Friends{
 		System.out.println("First, you will need to type the name of the text file that you wish to use as input.");
 		File inputFile = new File(stdin.next());
 		mainGraph.build(inputFile);
+		mainGraph.printGraph(mainGraph.map, mainGraph.people, mainGraph.vertices);
 		
 		
 		char option = getOption();
@@ -103,18 +104,18 @@ public class Friends{
 	 */
 	private void addVertex(String pInfo){
 		Scanner pReader = new Scanner(pInfo);
-		pReader.useDelimiter("|");
+		pReader.useDelimiter("\\|");
 		String name = pReader.next();
 		if (pReader.next()=="y"){
 			String school = pReader.next();
 			people.add(new Person(name, school));
 			map.add(name);
-			this.vertexes.add(new Node<Integer>(map.indexOf(name), null));
+			this.vertices.add(new Node<Integer>(map.indexOf(name), null));
 		}
 		else{
 			people.add(new Person(name));
 			map.add(name);
-			this.vertexes.add(new Node<Integer>(map.indexOf(name), null));
+			this.vertices.add(new Node<Integer>(map.indexOf(name), null));
 		}
 		
 		pReader.close();
@@ -123,14 +124,20 @@ public class Friends{
 	
 	private void addEdge(String fInfo){
 		Scanner fReader = new Scanner(fInfo);
-		fReader.useDelimiter("|");
+		fReader.useDelimiter("\\|");
 		String f1 = fReader.next();
 		String f2 = fReader.next();
 		int f1_index = map.indexOf(f1), f2_index = map.indexOf(f2);
 				
-		for (Node<Integer> p = vertexes.get(f1_index); p.data!=f2_index; p = p.link){
+		for (Node<Integer> p = vertices.get(f1_index); p!=null && p.data!=f2_index; p = p.link){
 			 if(p.link==null){
 				 p.addLink(new Node<Integer>(f2_index, null));
+				 break;
+			 }
+		}
+		for (Node<Integer> p = vertices.get(f2_index); p!=null && p.data!=f1_index; p = p.link){
+			 if(p.link==null){
+				 p.addLink(new Node<Integer>(f1_index, null));
 				 break;
 			 }
 		}
@@ -164,6 +171,28 @@ public class Friends{
 		/*
 		 * Complete this method
 		 */
+		return;
+	}
+	
+	public void printGraph(ArrayList<String> map, ArrayList<Person> people, ArrayList<Node<Integer>> vertices){
+		/*
+		 * Complete this method
+		 */
+		for(int i = 0; i<vertices.size(); i++){
+			System.out.print(vertices.get(i).data + " (" + map.get(i) + ") : ");
+			for (Node<Integer> p = vertices.get(i).link; p!=null; p=p.link){
+				System.out.print(vertices.get(p.data).data + " (" + map.get(p.data) + ")");
+				if(p.link!=null){
+					System.out.print(", ");
+					if(p.link.link==null){
+						System.out.print("and ");
+					}
+				}
+				
+			}
+			System.out.print("\n");
+		}
+				
 		return;
 	}
 	
