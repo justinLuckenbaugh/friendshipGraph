@@ -12,8 +12,11 @@ public class Node<T>{
 		this.link = link;
 	}
 	
-	public void addLink(Node<T> link){
-		this.link = link;
+	public void insertRight(Node<T> insertion){
+		if(this.link!=null){
+			insertion.link=this.link;
+		}
+		this.link = insertion;
 		return;
 	}
 	
