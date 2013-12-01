@@ -20,4 +20,10 @@ public class Node<T>{
 		return;
 	}
 	
+	public void removeRight(){
+		if(this.link!=null){
+			this.link=this.link.link;
+		}
+		return;
+	}
 }

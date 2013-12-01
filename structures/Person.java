@@ -2,8 +2,8 @@ package structures;
 
 public class Person{
 	
-	String name;
-	String school;
+	public String name;
+	public String school;
 	
 	/*
 	 * Constructor for when the person is a student and has a school listed
@@ -18,6 +18,10 @@ public class Person{
 	 */
 	public Person(String name){
 		this.name = name;
+	}
+	
+	public String toString(){
+		return name + ", " + school; 
 	}
 	
 }
